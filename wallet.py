@@ -1,15 +1,23 @@
 # wallet.py
 
 class InsufficientAmount(Exception):
-    pass
+    def __init__(self, message="Insufficient Amount!"):
+        self.message = message
+        super().__init__(message)
+
+    def __str__(self):
+        return self.message
+
 
 
 class Wallet(object):
     def __init__(self, initial_amount=0):
-        raise NotImplementedError
+        self.balance = initial_amount
 
     def spend_cash(self, amount):
-        raise NotImplementedError
+        if amount > self.balance:
+            raise InsufficientAmount("Insufficient Amount!")
+        self.balance = self.balance - amount
 
     def add_cash(self, amount):
-        raise NotImplementedError
+        self.balance = self.balance + amount
