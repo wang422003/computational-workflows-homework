@@ -1,0 +1,14 @@
+name: workflow CI
+on: [push]
+jobs:
+  tests:
+    runs-on: ubuntu-22.04
+    container: wang422003/computational-workflows:latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run tests
+        run: |
+          python3 -m pytest
